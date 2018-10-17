@@ -1,7 +1,18 @@
-# homework10
-from items import ITEMS
+#!/usr/bin/env python3.6
+import argparse
+from items import Item
 from itertools import chain
 from itertools import combinations
+
+
+def _parse_args():
+    parser = argparse.ArgumentParser("knapsack_solution")  # add description
+    parser.add_argument("ITEMS_LIST",
+                        help="list of items to finnd optimized solution.\n"
+                             "Provide list of items in form:\n"
+                             "Item(name, weight, value).", type=Item)
+    parser.parse_args()
+    return parser.parse_args()
 
 
 def knapsack_problem(items_lst):
@@ -23,4 +34,12 @@ def knapsack_problem(items_lst):
                                                           knapsack_value)
 
 
-print(knapsack_problem(ITEMS))
+def main():
+    args = _parse_args()
+    items_list = args.ITEMS_LIST
+    result = knapsack_problem(items_list)
+    return result
+
+
+if __name__ == "__main__":
+    print(main())
